@@ -7,6 +7,7 @@ const $q = useQuasar()
 <template>
   <q-page padding>
     <q-btn color="secondary" label="切换主题" @click='$q.dark.toggle'/>
+    <q-btn color='secondary' label='login' icon='login' @click='$router.push("/login")'/>
   </q-page>
   <div class='bg-blue-1'>111</div>
 </template>
