@@ -14,7 +14,7 @@ service.interceptors.request.use(
   function (config) {
     const userStore = UserStore();
 
-    if (userStore.token.length > 0 && config.headers) {
+    if (userStore.token.length > 0) {
       config.headers!.Authorization = `Bearer ${userStore.token}`;
     }
     return config;

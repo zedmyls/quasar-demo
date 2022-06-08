@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { useRegisterStore } from 'pages/access/register/vm/register.store';
-import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 const $r = useRegisterStore();
-const { user, repeatPwd } = storeToRefs($r);
-const isPwd = ref(true);
-
-const form = ref(null);
+const { user, repeatPwd, isPwd, isAgree } = storeToRefs($r);
 </script>
 
 <template>
@@ -25,7 +21,11 @@ const form = ref(null);
             (value && value.length >= 3 && value.length <= 10) ||
             '用户名长度需在3-10间',
         ]"
-      />
+      >
+        <template v-slot:prepend>
+          <q-icon name="fa-solid fa-user-ninja" />
+        </template>
+      </q-input>
 
       <q-input
         v-model="user.password"
@@ -47,6 +47,9 @@ const form = ref(null);
             @click="isPwd = !isPwd"
           />
         </template>
+        <template v-slot:prepend>
+          <q-icon name="fa-solid fa-lock" />
+        </template>
       </q-input>
 
       <q-input
@@ -59,6 +62,9 @@ const form = ref(null);
           (value) => value === user.password || '两次输入的密码不一致',
         ]"
       >
+        <template v-slot:prepend>
+          <q-icon name="fa-solid fa-lock" />
+        </template>
       </q-input>
 
       <q-input
@@ -73,10 +79,26 @@ const form = ref(null);
               )) ||
             '请输入有效格式的邮箱',
         ]"
-      />
+      >
+        <template v-slot:prepend>
+          <q-icon name="fa-solid fa-at" />
+        </template>
+      </q-input>
 
       <div>
-        <q-btn label="注册" type="submit" color="primary" size="md" />
+        <q-checkbox v-model="isAgree" color="cyan" />
+        <span
+          >您需同意本APP的<span
+            class="text-light-blue-5 cursor-pointer"
+            @click.stop="$r.showDialog"
+            >用户使用规范</span
+          ></span
+        >
+      </div>
+
+      <div>
+        <q-btn label="注册" type="submit" color="primary" size="md" :disable='!isAgree'/>
+        <q-btn color="black" label="已有账号？去登录" class='float-right'/>
       </div>
     </q-form>
   </q-page>
