@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
-import { UserStore } from 'src/stores/user.store';
 import { Loading, Notify } from 'quasar';
 
 // 创建axios
@@ -12,11 +11,6 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   function (config) {
-    const userStore = UserStore();
-
-    if (userStore.token.length > 0) {
-      config.headers!.Authorization = `Bearer ${userStore.token}`;
-    }
     return config;
   },
   function (error) {
@@ -27,18 +21,19 @@ service.interceptors.request.use(
 // 添加响应拦截器
 service.interceptors.response.use(
   function (response) {
-    if (
-      response.status >= 200 &&
-      response.status < 300 &&
-      response.data.message
-    ) {
-      Notify.create({
-        message: response.data.message,
-        position: 'top',
-        type: 'positive',
-        timeout: 1000,
-      });
-    }
+    // if (
+    //   response.status >= 200 &&
+    //   response.status < 300 &&
+    //   response.data.message
+    // ) {
+    //   console.log(response.config);
+    //   Notify.create({
+    //     message: response.data.message,
+    //     position: 'top',
+    //     type: 'positive',
+    //     timeout: 1000,
+    //   });
+    // }
 
     return response;
   },

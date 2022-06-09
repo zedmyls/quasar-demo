@@ -1,8 +1,7 @@
 import { QSpinnerFacebook, Loading } from 'quasar';
-import { AxiosResponse } from 'axios';
 
 export const requestWithLoading = async <T>(
-  request: () => Promise<AxiosResponse>,
+  request: () => Promise<any>,
   callback?: (data: T) => void
 ) => {
   Loading.show({
@@ -14,7 +13,7 @@ export const requestWithLoading = async <T>(
     messageColor: 'black',
   });
 
-  const res = await request();
+  const data = await request();
   Loading.hide();
-  callback?.(res.data);
+  callback?.(data);
 };

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { RegisterReqModel } from 'pages/access/register/vm/register-req.model';
 import { requestWithLoading } from 'src/utils/functions';
-import service from 'src/network';
 import { Dialog } from 'quasar';
+import { fetchPost } from 'src/network/request';
 
 export const useRegisterStore = defineStore('register', {
   state: () => ({
@@ -18,7 +18,7 @@ export const useRegisterStore = defineStore('register', {
       }
 
       requestWithLoading<string>(
-        () => service.post('register', this.user),
+        () => fetchPost('register', this.user, { isShowSuccessMsg: false }),
         (data) => {
           console.log(data);
         }
