@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRegisterStore } from 'pages/access/register/vm/register.store';
+import { useRegisterStore } from 'stores/access/register/register.store';
 import { storeToRefs } from 'pinia';
 
 const $r = useRegisterStore();

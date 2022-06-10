@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { RegisterReqModel } from 'pages/access/register/vm/register-req.model';
-import { requestWithLoading } from 'src/utils/functions';
+import { RegisterReqModel } from 'src/models/access/register-req.model';
+import { requestWithLoading } from 'utils/functions';
 import { Dialog } from 'quasar';
-import { fetchPost } from 'src/network/request';
+import { fetchPost } from 'network/request';
 
 export const useRegisterStore = defineStore('register', {
   state: () => ({
